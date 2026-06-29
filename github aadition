@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    // User se input lene ke liye parameters
+    parameters {
+        string(name: 'NUM1', defaultValue: '10', description: 'Pehla number enter karein')
+        string(name: 'NUM2', defaultValue: '20', description: 'Dusra number enter karein')
+    }
+
+    stages {
+        stage('Addition Stage') {
+            steps {
+                script {
+                    // String parameters ko Integer mein convert karke add kar rahe hain
+                    def num1 = params.NUM1.toInteger()
+                    def num2 = params.NUM2.toInteger()
+                    def result = num1 + num2
+                    
+                    // Result ko console output mein print karna
+                    echo "------------------------------------------------"
+                    echo "Pehla Number: ${num1}"
+                    echo "Dusra Number: ${num2}"
+                    echo "Dono ka Addition (Sum) hai: ${result}"
+                    echo "------------------------------------------------"
+                }
+            }
+        }
+    }
+}
